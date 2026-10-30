@@ -6,15 +6,21 @@ const PORT = 3000;
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
-app.get('', (req, res) => {
+
+app.get('/', (req, res) => {
+    const posts = db.prepare('SELECT * FROM posts ORDER BY id DESC').all();
+    res.render('index', { posts });
+});
+
+app.get('/', (req, res) => {
     res.send('<h1>Hello from my server!</h1>');
 });
 
-app.get('about', (req, res) => {
+app.get('/about', (req, res) => {
     res.send('<h1>About the Web Design Club</h1>');
 });
 
-app.get('contact', (req, res) => {
+app.get('/contact', (req, res) => {
     res.send('<h1>Contact Us: </h1>');
 });
 
