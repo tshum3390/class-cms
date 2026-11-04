@@ -3,7 +3,8 @@ const db = require('./db');
 const posts = [
     ['Welcome to the Club Blog', 'This is the very first post on our brand new CMS.'],
     ['Meeting Times', 'We meet every other Tuesdat after school in room 114.'],
-    ['Spring Project Ideas', 'Vote for your favorite project idea at the next meeting.']
+    ['Spring Project Ideas', 'Vote for your favorite project idea at the next meeting.'],
+    ['Test message check one-two one-two.']
 ];
 
 db.exec('DELETE FROM posts');
