@@ -8,7 +8,7 @@
 
 <% posts.forEach(post => { %>
     <article class="post-card">
-        <h3><a href="/post/"<%= post.id %>"><%= post.title %></a></h3>
+        <h3><a href="/post/<%= post.id %>"><%= post.title %></a></h3>
         <p class="meta"><%= post.created_at %></p>
         <p><%= post.body.substring(0, 100) %></p>
     </article>

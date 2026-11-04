@@ -12,6 +12,14 @@ app.get('/', (req, res) => {
     res.render('index', { posts });
 });
 
+app.get('/post/:id', (req, res) => {
+    const post = db.prepare('SELECT * FROM posts WHERE id = ?').get(req.params.id);
+    if (!post) {
+        return res.status(404).send('Post not found');
+    }
+    res.render('post', { post });
+});
+
 app.get('/', (req, res) => {
     res.send('<h1>Hello from my server!</h1>');
 });
