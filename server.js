@@ -21,6 +21,13 @@ app.use((req, res, next) => {
     next();
 });
 
+function requireLogin(req, res, next) {
+    if (!req.session.user) {
+        return res.redirect('/login');
+    }
+    next();
+}
+
 app.get('/', (req, res) => {
     const posts = db.prepare('SELECT * FROM posts ORDER BY id DESC').all();
     res.render('index', { posts });
@@ -48,6 +55,16 @@ app.get('/contact', (req, res) => {
 
 app.get('/login', (req, res) => {
     res.render('login', { error: null });
+});
+
+app.get('/admin', requireLogin, (req, res) => {
+    res.send('<h1>Welcome, ' + req.session.user.username +  '</h1>');
+});
+
+app.post('/logout', (req, res) => {
+    req.session.destroy(() => {
+        res.redirect('/');
+    });
 });
 
 app.post('/login', (req, res) => {
