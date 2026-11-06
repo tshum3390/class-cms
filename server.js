@@ -58,7 +58,8 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/admin', requireLogin, (req, res) => {
-    res.send('<h1>Welcome, ' + req.session.user.username +  '</h1>');
+    const posts = db.prepare('SELECT * FROM posts ORDER BY id DESC').all();
+    res.render('dashboard', { posts });
 });
 
 app.post('/logout', (req, res) => {
