@@ -4,7 +4,7 @@ const db = require('./db');
 const username = process.argv[2];
 const password = process.argv[3];
 
-if (!username || ! password) {
+if (!username || !password) {
     console.log('Usage: node createuser.js <username> <password>');
     process.exit(1);
 }
