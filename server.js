@@ -62,6 +62,16 @@ app.get('/admin', requireLogin, (req, res) => {
     res.render('dashboard', { posts });
 });
 
+app.get('/admin/new', requireLogin, (req, res) => {
+    res.render('edit', { post: null });
+});
+
+app.post('/admin/new', requireLogin, (req, res) => {
+    const { title, body } = req.body;
+    db.prepare('INSERT INTO posts (title, body) VALUES (?, ?)').run(title, body);
+    res.redirect('/admin');
+});
+
 app.post('/logout', (req, res) => {
     req.session.destroy(() => {
         res.redirect('/');
